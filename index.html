@@ -147,26 +147,18 @@ body{background:#F5F1EB;color:#000;-webkit-font-smoothing:antialiased;overflow-x
 </div>
 
 <script>
+// FIX Threads: Hapus snssdk1180 / snssdk1233 - pakai https biasa biar di Threads gak ke-block
 document.addEventListener('DOMContentLoaded', function(){
+  var username = 'nuvorastore.id';
+  var profileLink = 'https://www.tiktok.com/@' + username;
   function openTikTokShop(e){
-    e.preventDefault();
-    var username = 'nuvorastore.id';
-    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if(isMobile){
-      // Try to open TikTok app directly to shop tab
-      var appLink = 'snssdk1233://user/profile/' + username + '?shop_tab=1';
-      var fallbackLink = 'https://www.tiktok.com/@' + username + '/shop';
-      // Attempt app open
-      window.location.href = appLink;
-      // Fallback to web shop after 1.2s if app not installed
-      setTimeout(function(){
-        window.open(fallbackLink, '_blank');
-      }, 1200);
-    } else {
-      // Desktop: open profile, user needs to click Shop tab (TikTok web redirects /shop to foryou if not logged in)
-      // So open profile in new tab
-      window.open('https://www.tiktok.com/@' + username, '_blank');
+    var ua = navigator.userAgent || '';
+    var isInApp = /FBAN|FBAV|FB_IAB|Instagram|Threads/i.test(ua);
+    if(isInApp){
+      return true; // biar href default jalan di Threads/IG
     }
+    e.preventDefault();
+    window.open(profileLink, '_blank', 'noopener');
   }
   var btn = document.getElementById('tiktok-shop-btn');
   var sticky = document.getElementById('tiktok-sticky');
