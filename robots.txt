@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://nuvorastore.my.id/sitemap.xml
