@@ -443,7 +443,10 @@
       const market = btn.dataset.market;
       const eventName = marketEventNames[market];
       if (typeof fbq === 'function' && eventName) {
+        // Event kustom per marketplace (untuk breakdown laporan)
         fbq('trackCustom', eventName, {marketplace: market});
+        // Event standar Lead (untuk optimasi iklan)
+        fbq('track', 'Lead', {marketplace: market});
       }
     });
   });
